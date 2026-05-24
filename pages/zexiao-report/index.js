@@ -2,34 +2,17 @@ var config = require('../../config.js');
 
 Page({
   data: {
-    reportHtml: '',
     loading: true,
     error: '',
     generating: false,
-    mode: 'chat',
-    reportData: null,
-    dimKeys: [
-      { key: 'step1_personality', icon: '🧠', title: '性格特质', index: '一' },
-      { key: 'step2_fri', icon: '💰', title: '家庭资源', index: '二' },
-      { key: 'step3_kondratiev', icon: '📈', title: '行业周期', index: '三' },
-      { key: 'step4_location', icon: '🏙️', title: '地域价值', index: '四' },
-      { key: 'step5_competition', icon: '🎓', title: '升学竞争', index: '五' },
-      { key: 'step6_contingency', icon: '🎯', title: '容错规划', index: '六' }
-    ]
+    mode: 'full',
+    reportData: null
   },
 
   onLoad: function(options) {
     var sysInfo = wx.getSystemInfoSync();
     this.setData({ statusBarHeight: sysInfo.statusBarHeight || 44 });
-
-    var mode = (options && options.mode === 'full') ? 'full' : 'chat';
-    this.setData({ mode: mode });
-
-    if (mode === 'full') {
-      this.loadFullReport();
-    } else {
-      this.loadFullReport();
-    }
+    this.loadFullReport();
   },
 
   loadFullReport: function() {
@@ -38,7 +21,7 @@ Page({
     try { reportData = wx.getStorageSync('zexiao_report_data'); } catch(e) {}
 
     if (reportData) {
-      that.setData({ reportData: reportData, loading: false });
+      that.setData({ reportData: that._flattenReport(reportData), loading: false });
       return;
     }
 
@@ -74,8 +57,9 @@ Page({
       success: function(res) {
         wx.hideLoading();
         if (res.statusCode === 200 && res.data && res.data.status === 'success') {
-          that.setData({ reportData: res.data.data, loading: false, generating: false });
-          try { wx.setStorageSync('zexiao_report_data', res.data.data); } catch(e) {}
+          var flatData = that._flattenReport(res.data.data);
+          that.setData({ reportData: flatData, loading: false, generating: false });
+          try { wx.setStorageSync('zexiao_report_data', flatData); } catch(e) {}
         } else {
           var errMsg = '生成失败';
           if (res.data && res.data.message) errMsg = res.data.message;
@@ -84,22 +68,40 @@ Page({
       },
       fail: function() {
         wx.hideLoading();
-        that.setData({ loading: false, error: '网络请求失败，请检查后端是否运行', generating: false });
+        that.setData({ loading: false, error: '网络请求失败', generating: false });
       }
     });
   },
 
-  goBack: function() {
-    wx.navigateBack();
+  // 把对象类型的值递归转成字符串
+  _flattenReport: function(data) {
+    if (!data) return data;
+    var result = {};
+    for (var key in data) {
+      var val = data[key];
+      if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+        // 递归处理子对象
+        var sub = {};
+        for (var k in val) {
+          if (typeof val[k] === 'object' && val[k] !== null) {
+            sub[k] = JSON.stringify(val[k], null, 2);
+          } else {
+            sub[k] = val[k];
+          }
+        }
+        result[key] = sub;
+      } else if (typeof val === 'object' && val !== null) {
+        result[key] = JSON.stringify(val, null, 2);
+      } else {
+        result[key] = val;
+      }
+    }
+    return result;
   },
 
-  retryReport: function() {
-    this.loadFullReport();
-  },
-
-  getDimValue: function(key, field) {
-    var data = this.data.reportData;
-    if (!data || !data[key]) return '-';
-    return data[key][field] || '-';
+  goBack: function() { wx.navigateBack(); },
+  retryReport: function() { this.loadFullReport(); },
+  copyWechat: function() {
+    wx.setClipboardData({ data: 'zhizetong_ai', success: function() { wx.showToast({ title: '微信号已复制' }); } });
   }
 });

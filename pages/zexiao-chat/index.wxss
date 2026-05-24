@@ -137,3 +137,13 @@
   font-weight: bold;
   border: 1px solid #2A2D40;
 }
+.retry-btn-inline {
+  margin-top: 16rpx;
+  padding: 16rpx 40rpx;
+  background: linear-gradient(135deg, #D4AF37, #F5D76E);
+  color: #1a1814;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  display: inline-block;
+}

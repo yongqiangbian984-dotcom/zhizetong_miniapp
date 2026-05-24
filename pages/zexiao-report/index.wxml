@@ -8,8 +8,7 @@
 
   <scroll-view class="report-body" scroll-y="true">
 
-    <!-- ========== 6维完整报告 ========== -->
-    <block wx:if="{{mode === 'full' && reportData}}">
+    <block wx:if="{{reportData}}">
       <view class="report-header">
         <view class="report-title">智择通6维评估报告</view>
         <view class="report-sub">DeepSeek AI + 康波周期分析</view>
@@ -54,7 +53,7 @@
         </view>
         <view class="dim-item">
           <view class="dim-label">AI替代风险</view>
-          <view class="dim-value {{reportData.step3_kondratiev.ai_risk === '极低' || reportData.step3_kondratiev.ai_risk === '低' ? 'safe' : 'warn'}}">{{reportData.step3_kondratiev.ai_risk || '-'}}</view>
+          <view class="dim-value">{{reportData.step3_kondratiev.ai_risk || '-'}}</view>
         </view>
         <view class="dim-item">
           <view class="dim-label">趋势建议</view>
@@ -137,17 +136,6 @@
       </view>
     </block>
 
-    <!-- ========== 旧版聊天报告 ========== -->
-    <block wx:if="{{mode !== 'full'}}">
-      <view class="report-header">
-        <view class="report-title">择校分析报告</view>
-        <view class="report-sub">智择通 AI 生成</view>
-      </view>
-      <view wx:if="{{reportHtml}}" class="report-content">
-        <rich-text nodes="{{reportHtml}}"></rich-text>
-      </view>
-    </block>
-
     <!-- 加载状态 -->
     <view class="loading-state" wx:if="{{loading}}">
       <view class="loading-text">专业AI正在生成...</view>
@@ -161,8 +149,4 @@
     </view>
 
   </scroll-view>
-</view>
-
-<view class="footer-hook" bindtap="copyWechat">
-  👨‍🏫 报告有疑问？点击复制首席规划师微信，免费答疑 1 次
 </view>

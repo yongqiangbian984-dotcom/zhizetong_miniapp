@@ -131,9 +131,8 @@ Page({
         } else {
           var errMsg = '评估失败';
           if (res.data && res.data.message) errMsg = res.data.message;
-          if (res.data && res.data.raw_content) errMsg = 'AI返回格式异常，请重试';
           that.setData({
-            messages: [{ role: 'ai', content: '评估失败：' + errMsg + '\n\n请返回重试。' }],
+            messages: [{ role: 'ai', content: '评估失败：' + errMsg + '\n\n点击下方「重新评估」按钮重试。', isRetry: true }],
             sending: false
           });
         }
@@ -218,6 +217,15 @@ Page({
     this.setData({ keyboardHeight: h });
     if (h > 0) {
       this._scrollToLast(250);
+    }
+  },
+
+  retryConsult: function() {
+    var profile = this.data.profile;
+    if (profile && profile.province && profile.score) {
+      this.callConsultApi(profile);
+    } else {
+      wx.navigateBack();
     }
   },
 
