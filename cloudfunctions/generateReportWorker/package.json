@@ -1,0 +1,10 @@
+{
+  "name": "generateReportWorker",
+  "version": "1.0.0",
+  "description": "智择通异步报告生成",
+  "main": "index.js",
+  "cloudfunctionconfig": {
+    "memorySize": 512,
+    "timeout": 60
+  }
+}

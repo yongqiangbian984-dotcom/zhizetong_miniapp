@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="section-title">管理后台</view>
+  
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goInit">
+      <view class="menu-icon">🔧</view>
+      <view class="menu-text">
+        <view class="menu-title">数据库初始化</view>
+        <view class="menu-desc">创建集合并录入课程数据</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goCourse">
+      <view class="menu-icon">📚</view>
+      <view class="menu-text">
+        <view class="menu-title">课程管理</view>
+        <view class="menu-desc">添加/编辑课程</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goOrder">
+      <view class="menu-icon">📋</view>
+      <view class="menu-text">
+        <view class="menu-title">订单管理</view>
+        <view class="menu-desc">查看订单列表</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goAuth">
+      <view class="menu-icon">🔑</view>
+      <view class="menu-text">
+        <view class="menu-title">授权管理</view>
+        <view class="menu-desc">为用户开通课程访问权限</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goImport">
+      <view class="menu-icon">📦</view>
+      <view class="menu-text">
+        <view class="menu-title">内容导入</view>
+        <view class="menu-desc">导入章节内容(HTML/视频链接)</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+</view>

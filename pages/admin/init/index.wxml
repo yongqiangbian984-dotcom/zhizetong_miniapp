@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="header">
+    <text class="title">数据库初始化</text>
+    <text class="desc">点击下方按钮初始化数据库</text>
+  </view>
+
+  <button class="init-btn" type="primary" bindtap="onBeginInit" disabled="{{isRunning}}">
+    {{isRunning ? '初始化中...' : (isDone ? '已完成' : '开始初始化')}}
+  </button>
+
+  <scroll-view class="logs" scroll-y="true">
+    <text class="log-item" wx:for="{{logs}}" wx:key="index">{{item}}</text>
+  </scroll-view>
+</view>

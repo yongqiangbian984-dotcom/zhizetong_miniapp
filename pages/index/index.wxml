@@ -1,0 +1,121 @@
+<view class="container">
+  <view class="search-bar">
+    <view class="search-input-wrap" bindtap="onSearchTap">
+      <text class="search-placeholder">🔍 搜索课程</text>
+    </view>
+  </view>
+
+  <view class="banner-section">
+    <swiper class="banner-swiper" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay circular>
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <view class="banner-item" style="background: linear-gradient(135deg, {{item.color1}}, {{item.color2}});">
+          <text class="banner-text">{{item.title}}</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <view class="init-entry" bindtap="goToInit" wx:if="{{showInit}}">
+    <text>⚙️ 初始化数据库（首次使用点我）</text>
+  </view>
+
+  <view class="category-nav">
+    <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-id="{{item.id}}">
+      <view class="category-icon-box">
+        <text class="category-emoji">{{item.emoji}}</text>
+      </view>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="tools-entry" bindtap="goToTools">
+    <view class="tools-icon">
+      <text>🛠️</text>
+    </view>
+    <view class="tools-info">
+      <text class="tools-title">工具下载</text>
+      <text class="tools-desc">AI开发资源一键获取</text>
+    </view>
+    <view class="tools-arrow">
+      <text>›</text>
+    </view>
+  </view>
+
+  <view class="zexiao-entry" bindtap="goToZexiao">
+    <view class="zexiao-icon">
+      <text>🎓</text>
+    </view>
+    <view class="zexiao-info">
+      <text class="zexiao-title">智择通 · AI择校</text>
+      <text class="zexiao-desc">6维评估 智能择校规划</text>
+    </view>
+    <view class="zexiao-arrow">
+      <text>›</text>
+    </view>
+  </view>
+
+  <view class="free-section" bindtap="onFreeZoneTap">
+    <view class="free-left">
+      <text class="free-badge">免费</text>
+      <view class="free-info">
+        <text class="free-title">免费专区</text>
+        <text class="free-desc">精选免费课程</text>
+      </view>
+    </view>
+    <text class="free-arrow">进入 ›</text>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🔥 热门课程</text>
+      <text class="section-more" bindtap="goToCourseList">更多 ›</text>
+    </view>
+    <scroll-view class="hot-scroll" scroll-x="true">
+      <view class="hot-card" wx:for="{{hotCourses}}" wx:key="_id" bindtap="onCourseTap" data-id="{{item._id}}">
+        <view class="hot-cover" wx:if="{{item.coverUrl}}" style="overflow:hidden;">
+          <image class="hot-cover-img" src="{{item.coverUrl}}" mode="aspectFill"></image>
+          <text class="hot-badge" wx:if="{{item.isFree}}">免费</text>
+        </view>
+        <view class="hot-cover" wx:else style="background: linear-gradient(135deg, {{item.color1 || '#667eea'}}, {{item.color2 || '#764ba2'}});">
+          <text class="hot-cover-text">{{item.title}}</text>
+          <text class="hot-badge" wx:if="{{item.isFree}}">免费</text>
+        </view>
+        <view class="hot-info">
+          <text class="hot-title">{{item.title}}</text>
+          <view class="hot-meta">
+            <text class="hot-price" wx:if="{{!item.isFree}}">¥{{item.price}}</text>
+            <text class="hot-price-free" wx:else>免费</text>
+            <text class="hot-students">{{item.studentCount}}人学</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🆕 最新课程</text>
+      <text class="section-more" bindtap="goToCourseList">更多 ›</text>
+    </view>
+    <view class="new-list">
+      <view class="new-item" wx:for="{{newCourses}}" wx:key="_id" bindtap="onCourseTap" data-id="{{item._id}}">
+        <view class="new-cover" wx:if="{{item.coverUrl}}" style="overflow:hidden;">
+          <image class="new-cover-img" src="{{item.coverUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="new-cover" wx:else style="background: linear-gradient(135deg, {{item.color1 || '#667eea'}}, {{item.color2 || '#764ba2'}});">
+          <text class="new-cover-text">{{item.title}}</text>
+        </view>
+        <view class="new-info">
+          <text class="new-title">{{item.title}}</text>
+          <text class="new-desc">{{item.description}}</text>
+          <view class="new-meta">
+            <text class="new-price" wx:if="{{!item.isFree}}">¥{{item.price}}</text>
+            <text class="new-price-free" wx:else>免费</text>
+            <text class="new-teacher">{{item.teacher}}</text>
+            <text class="new-students">{{item.studentCount}}人学</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

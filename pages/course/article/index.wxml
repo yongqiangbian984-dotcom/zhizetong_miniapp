@@ -1,0 +1,84 @@
+<view class="container">
+  <view class="article-header" wx:if="{{chapter}}">
+    <text class="article-title">{{chapter.title}}</text>
+    <text class="article-free" wx:if="{{chapter.isFree}}">免费试读</text>
+  </view>
+  
+  <!-- 视频播放器区域 -->
+  <view class="video-section" wx:if="{{hasVideo}}">
+    <!-- 当前播放视频 -->
+    <view class="video-player-wrap">
+      <video 
+        id="mainVideo" 
+        class="video-player"
+        src="{{currentVideoUrl}}"
+        controls
+        show-center-play-btn
+        show-fullscreen-btn
+        enable-play-gesture
+        binderror="onVideoError"
+        poster="">
+      </video>
+    </view>
+    
+    <!-- 视频列表切换 -->
+    <view class="video-list-wrap">
+      <view class="video-list-header" bindtap="onToggleVideoList">
+        <text class="video-list-title">视频列表 ({{videoUrls.length}}个)</text>
+        <text class="video-list-arrow">{{showVideoCard ? '收起' : '展开'}}</text>
+      </view>
+      <view class="video-list" wx:if="{{showVideoCard}}">
+        <view 
+          class="video-item {{index === currentVideoIndex ? 'active' : ''}}" 
+          wx:for="{{videoUrls}}" 
+          wx:for-index="index"
+          bindtap="onSwitchVideo"
+          data-index="{{index}}">
+          <text class="video-item-index">{{index + 1}}</text>
+          <text class="video-item-text">视频 {{index + 1}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 文章内容 -->
+  <view class="article-content" wx:if="{{contentHtml}}">
+    <rich-text nodes="{{contentHtml}}"></rich-text>
+  </view>
+  
+  <!-- 资源链接区域 -->
+  <view class="resource-section" wx:if="{{hasResourceLink}}">
+    <view class="resource-card" wx:if="{{hasPurchased}}">
+      <view class="resource-header">
+        <text class="resource-title">课程资源</text>
+      </view>
+      <view class="resource-info">
+        <view class="resource-row">
+          <text class="resource-label">网盘链接</text>
+          <text class="resource-value">{{resourceLink.url}}</text>
+        </view>
+        <view class="resource-row">
+          <text class="resource-label">提取码</text>
+          <text class="resource-value password">{{resourceLink.password}}</text>
+        </view>
+      </view>
+      <view class="resource-btn" bindtap="onShowResource">
+        <text class="resource-btn-text">复制链接</text>
+      </view>
+    </view>
+    <view class="resource-card locked" wx:else>
+      <view class="resource-header">
+        <text class="resource-title">完整课程资料</text>
+      </view>
+      <text class="resource-desc">完整课程包含200+节课程资料</text>
+      <view class="resource-btn contact" bindtap="onContactService">
+        <text class="resource-btn-text">获取完整课程</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="article-empty" wx:elif="{{!loading}}">
+    <text>内容加载中...</text>
+  </view>
+</view>

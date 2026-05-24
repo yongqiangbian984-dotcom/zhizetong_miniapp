@@ -1,0 +1,22 @@
+.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 50rpx; }
+.user-header { background: linear-gradient(135deg, #4A90D9, #6BA3E0); padding: 40rpx 30rpx; }
+.user-row { display: flex; align-items: center; }
+.avatar-box { width: 96rpx; height: 96rpx; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48rpx; margin-right: 20rpx; }
+.user-info { flex: 1; }
+.nickname { font-size: 32rpx; font-weight: bold; color: #fff; display: block; }
+.user-tip { font-size: 24rpx; color: rgba(255,255,255,0.8); margin-top: 4rpx; display: block; }
+.arrow { font-size: 32rpx; color: rgba(255,255,255,0.6); }
+.order-section { background: #fff; margin: 20rpx 24rpx; border-radius: 16rpx; padding: 24rpx; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16rpx; }
+.section-title { font-size: 30rpx; font-weight: bold; color: #333; }
+.section-more { font-size: 24rpx; color: #999; }
+.order-tabs { display: flex; justify-content: space-around; }
+.order-tab { display: flex; flex-direction: column; align-items: center; padding: 10rpx 0; }
+.tab-emoji { font-size: 40rpx; margin-bottom: 6rpx; }
+.tab-text { font-size: 24rpx; color: #666; }
+.menu-section { background: #fff; margin: 20rpx 24rpx; border-radius: 16rpx; overflow: hidden; }
+.menu-item { display: flex; align-items: center; padding: 28rpx 24rpx; border-bottom: 1rpx solid #f5f5f5; }
+.menu-item:last-child { border-bottom: none; }
+.menu-emoji { font-size: 36rpx; margin-right: 16rpx; }
+.menu-text { flex: 1; font-size: 28rpx; color: #333; }
+.menu-arrow { font-size: 28rpx; color: #ccc; }

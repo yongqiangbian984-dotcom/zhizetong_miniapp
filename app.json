@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/zexiao-entry/index",
+    "pages/zexiao-chat/index",
+    "pages/zexiao-progress/index",
+    "pages/zexiao-report/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4A90D9",
+    "navigationBarTitleText": "智择通",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="header-section">
+    <text class="header-title">🛠️ 开发工具</text>
+    <text class="header-desc">精选AI开发资源，一键下载</text>
+  </view>
+
+  <view class="tools-list">
+    <view class="tool-card" wx:for="{{tools}}" wx:key="_id">
+      <view class="tool-icon">
+        <text>{{item.icon}}</text>
+      </view>
+      <view class="tool-info">
+        <text class="tool-name">{{item.name}}</text>
+        <text class="tool-desc">{{item.description}}</text>
+      </view>
+      <view class="tool-action">
+        <button class="download-btn" bindtap="onDownload" data-url="{{item.downloadUrl}}" data-name="{{item.name}}">
+          下载
+        </button>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{tools.length === 0 && !loading}}">
+      <text class="empty-icon">📦</text>
+      <text class="empty-text">暂无工具资源</text>
+    </view>
+  </view>
+
+  <view class="loading-state" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

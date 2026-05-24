@@ -1,0 +1,12 @@
+{
+  "envId": "cloudbase-d3gvl5muqbafacebb",
+  "functionRoot": "cloudfunctions",
+  "functions": [
+    {
+      "name": "api",
+      "timeout": 20,
+      "runtime": "Nodejs16.13",
+      "handler": "index.main"
+    }
+  ]
+}

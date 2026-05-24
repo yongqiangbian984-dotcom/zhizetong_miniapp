@@ -1,0 +1,60 @@
+<view class="container">
+  <!-- 授权表单 -->
+  <view class="section">
+    <view class="section-title">手动授权</view>
+    <view class="form-card">
+      <view class="form-item">
+        <text class="form-label">用户openid</text>
+        <input 
+          class="form-input" 
+          placeholder="请输入用户openid" 
+          value="{{openid}}"
+          bindinput="onOpenidInput"
+        />
+      </view>
+      <view class="form-item">
+        <text class="form-label">选择课程</text>
+        <picker 
+          mode="selector" 
+          range="{{courseList}}" 
+          range-key="title"
+          bindchange="onCourseSelect"
+        >
+          <view class="form-picker">
+            <text class="{{selectedCourseName ? '' : 'placeholder'}}">
+              {{selectedCourseName || '请选择课程'}}
+            </text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="form-btn" bindtap="onGrant">
+        <text class="form-btn-text" wx:if="{{!grantLoading}}">确认授权</text>
+        <text class="form-btn-text" wx:else>授权中...</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 授权记录 -->
+  <view class="section">
+    <view class="section-title">授权记录</view>
+    <view class="record-list">
+      <view class="record-item" wx:for="{{grantList}}" wx:key="_id">
+        <view class="record-info">
+          <view class="record-course">{{item.courseTitle}}</view>
+          <view class="record-openid" data-openid="{{item._openid}}" bindtap="onCopyOpenid">
+            <text class="openid-text">{{item._openid}}</text>
+            <text class="copy-icon">📋</text>
+          </view>
+          <view class="record-time">{{formatTime(item.grantTime)}}</view>
+        </view>
+        <view class="record-tag">
+          <text class="tag {{item.grantType === 'manual' ? 'manual' : 'auto'}}">{{item.grantType === 'manual' ? '手动' : '自动'}}</text>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{grantList.length === 0}}">
+        <text>暂无授权记录</text>
+      </view>
+    </view>
+  </view>
+</view>

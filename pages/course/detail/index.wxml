@@ -1,0 +1,74 @@
+<view class="container">
+  <view class="course-header" wx:if="{{course.coverUrl}}" style="position:relative;overflow:hidden;">
+    <image class="course-header-bg" src="{{course.coverUrl}}" mode="aspectFill"></image>
+    <view class="course-header-overlay"></view>
+  </view>
+  <view class="course-header" wx:else style="background: linear-gradient(135deg, {{course.color1}}, {{course.color2}});">
+    <text class="course-title">{{course.title}}</text>
+    <view class="course-price-row">
+      <text class="course-price" wx:if="{{!course.isFree}}">¥{{priceDisplay}}</text>
+      <text class="course-price-free" wx:else>免费</text>
+      <text class="course-original" wx:if="{{course.originalPrice}}">¥{{course.originalPrice}}</text>
+    </view>
+    <text class="course-students">{{course.studentCount}}人已学</text>
+    <view class="course-resource-tag" wx:if="{{hasResourceLink}}">
+      <text class="resource-tag-text">{{hasPurchased ? '已购' : '网盘课'}}</text>
+    </view>
+  </view>
+
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'intro' ? 'active' : ''}}" data-tab="intro" bindtap="onTabChange">课程介绍</view>
+    <view class="tab-item {{currentTab === 'chapters' ? 'active' : ''}}" data-tab="chapters" bindtap="onTabChange">课程目录</view>
+  </view>
+
+  <view class="tab-content" wx:if="{{currentTab === 'intro'}}">
+    <view class="intro-card">
+      <text class="intro-title">课程简介</text>
+      <text class="intro-text">{{course.description}}</text>
+    </view>
+    <view class="intro-card">
+      <text class="intro-title">你将学到</text>
+      <text class="intro-text" wx:for="{{course.learnList}}" wx:key="index">{{item}}</text>
+    </view>
+    <view class="intro-card resource-card" wx:if="{{hasResourceLink && hasPurchased}}">
+      <text class="intro-title">课程资源</text>
+      <view class="resource-info">
+        <view class="resource-item">
+          <text class="resource-label">网盘链接</text>
+          <text class="resource-value">{{resourceLink.url}}</text>
+        </view>
+        <view class="resource-item">
+          <text class="resource-label">提取码</text>
+          <text class="resource-value password">{{resourceLink.password}}</text>
+        </view>
+      </view>
+      <view class="resource-action" bindtap="onGetResource">
+        <text class="resource-action-text">点击复制链接</text>
+      </view>
+    </view>
+    <view class="intro-card resource-card resource-locked" wx:if="{{hasResourceLink && !hasPurchased}}">
+      <text class="intro-title">完整课程</text>
+      <text class="intro-text">完整课程资料通过百度网盘发放</text>
+      <view class="resource-action contact-action" bindtap="onGetResource">
+        <text class="resource-action-text">获取完整课程</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tab-content" wx:if="{{currentTab === 'chapters'}}">
+    <view class="chapter-item" wx:for="{{chapters}}" wx:key="_id" data-id="{{item._id}}" data-isfree="{{item.isFree}}" bindtap="onChapterTap">
+      <view class="chapter-header">
+        <text class="chapter-index">{{index + 1}}</text>
+        <text class="chapter-title">{{item.title}}</text>
+        <text class="chapter-free" wx:if="{{item.isFree}}">免费</text>
+        <text class="chapter-locked" wx:elif="{{!item.isFree && !hasResourceLink}}"></text>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bottom-btn buy-btn" bindtap="onBuy">
+      <text>{{buttonText}}</text>
+    </view>
+  </view>
+</view>

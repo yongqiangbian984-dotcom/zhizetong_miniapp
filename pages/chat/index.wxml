@@ -1,0 +1,31 @@
+<view class="chat-container">
+  <scroll-view class="message-list" scroll-y scroll-top="{{scrollTop}}" enhanced show-scrollbar="false" scroll-into-view="{{scrollIntoView}}">
+    <block wx:for="{{messages}}" wx:key="id">
+      <view id="msg-{{index}}" class="message-item {{item.role === 'user' ? 'user' : 'ai'}}">
+        <view class="message-avatar">
+          <text class="ai-avatar-text">{{item.role === 'user' ? '🦊' : '🤖'}}</text>
+        </view>
+        <view class="message-bubble">
+          <text class="message-content">{{item.content}}</text>
+          <text class="message-time">{{item.time}}</text>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{loading}}" class="message-item ai">
+      <view class="message-avatar">
+        <text class="ai-avatar-text">🤖</text>
+      </view>
+      <view class="message-bubble loading-bubble">
+        <text class="loading-dots">思考中</text>
+      </view>
+    </view>
+    <view id="msg-bottom" class="bottom-safe"></view>
+  </scroll-view>
+
+  <view class="input-area" style="bottom: {{keyboardHeight}}px;">
+    <view class="input-wrapper">
+      <input class="message-input" value="{{inputText}}" placeholder="输入消息..." bindinput="onInput" bindconfirm="onSend" confirm-type="send" adjust-position="{{false}}" bindfocus="onInputFocus" bindblur="onInputBlur" />
+      <button class="send-btn {{inputText.trim() ? 'active' : ''}}" bindtap="onSend" disabled="{{!inputText.trim() || loading}}">发送</button>
+    </view>
+  </view>
+</view>

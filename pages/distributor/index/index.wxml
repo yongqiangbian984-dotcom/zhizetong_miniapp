@@ -1,0 +1,100 @@
+<view class="container">
+  <view class="header">
+    <view class="user-row">
+      <view class="avatar-box">{{hasLogin ? '😊' : '👤'}}</view>
+      <view class="user-info">
+        <text class="nickname">{{hasLogin ? (userInfo.nickname || '微信用户') : '未登录'}}</text>
+        <view class="level-badge">
+          <text class="level-icon">★</text>
+          <text class="level-name">{{hasLogin ? (userInfo.levelName || '见习分销员') : '点击登录'}}</text>
+        </view>
+      </view>
+    </view>
+    <text class="status-tip">{{hasLogin ? '已开通分销资格' : '登录后可开通分销'}}</text>
+  </view>
+
+  <view class="earnings-section">
+    <view class="earnings-total">
+      <text class="earnings-label">累计收益</text>
+      <text class="earnings-value">¥{{totalEarningsText}}</text>
+    </view>
+    <view class="earnings-cards">
+      <view class="earnings-card">
+        <text class="card-value">¥{{todayEarningsText}}</text>
+        <text class="card-label">今日</text>
+      </view>
+      <view class="earnings-card">
+        <text class="card-value">¥{{availableEarningsText}}</text>
+        <text class="card-label">可提现</text>
+      </view>
+      <view class="earnings-card">
+        <text class="card-value">¥{{totalEarningsText}}</text>
+        <text class="card-label">累计</text>
+      </view>
+    </view>
+    <view class="withdraw-row">
+      <view class="withdraw-btn" bindtap="onWithdraw">立即提现</view>
+      <text class="withdraw-balance">可提现：¥{{availableEarningsText}}</text>
+    </view>
+  </view>
+
+  <view class="rules-section">
+    <text class="section-title">分销规则</text>
+    <view class="rule-item">
+      <text class="rule-level">见习分销员</text>
+      <text class="rule-commission">一级20% 二级5%</text>
+    </view>
+    <view class="rule-item">
+      <text class="rule-level">普通分销员</text>
+      <text class="rule-commission">一级25% 二级8% 三级3%</text>
+    </view>
+    <view class="rule-item">
+      <text class="rule-level">高级分销员</text>
+      <text class="rule-commission">一级30% 二级10% 三级5%</text>
+    </view>
+  </view>
+
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'team' ? 'active' : ''}}" data-tab="team" bindtap="onTabChange">我的团队</view>
+    <view class="tab-item {{currentTab === 'commission' ? 'active' : ''}}" data-tab="commission" bindtap="onTabChange">佣金明细</view>
+  </view>
+
+  <view wx:if="{{currentTab === 'team'}}" class="tab-content">
+    <view class="team-summary">
+      <view class="summary-item" data-level="level1" bindtap="onTeamLevelTap">
+        <text class="summary-value">{{teamCount.level1}}</text>
+        <text class="summary-label">一级粉丝</text>
+      </view>
+      <view class="summary-item" data-level="level2" bindtap="onTeamLevelTap">
+        <text class="summary-value">{{teamCount.level2}}</text>
+        <text class="summary-label">二级粉丝</text>
+      </view>
+      <view class="summary-item" data-level="level3" bindtap="onTeamLevelTap">
+        <text class="summary-value">{{teamCount.level3}}</text>
+        <text class="summary-label">三级粉丝</text>
+      </view>
+    </view>
+    <view wx:if="{{teamList.length === 0}}" class="empty-tip">暂无团队成员，快去邀请吧</view>
+    <view wx:for="{{teamList}}" wx:key="_id" class="member-item">
+      <view class="member-avatar">{{item.nickname ? item.nickname[0] : '用'}}</view>
+      <text class="member-name">{{item.nickname || '微信用户'}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{currentTab === 'commission'}}" class="tab-content">
+    <view wx:if="{{commissionList.length === 0}}" class="empty-tip">暂无佣金记录</view>
+    <view wx:for="{{commissionList}}" wx:key="_id" class="commission-item">
+      <view class="commission-left">
+        <text class="commission-course">{{item.courseTitle || '课程订单'}}</text>
+      </view>
+      <view class="commission-right">
+        <text class="commission-amount">+¥{{item.amountText}}</text>
+        <text class="commission-level">{{item.levelName || '佣金'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="promote-section">
+    <button class="promote-btn" open-type="share">↗ 分享邀请</button>
+  </view>
+</view>

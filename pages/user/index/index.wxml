@@ -1,0 +1,74 @@
+<view class="container">
+  <view class="user-header">
+    <view class="user-row" bindtap="onLoginTap">
+      <view class="avatar-box">{{hasLogin ? '😊' : '👤'}}</view>
+      <view class="user-info">
+        <text class="nickname">{{hasLogin ? (userInfo.nickname || '微信用户') : '点击登录'}}</text>
+        <text class="user-tip">{{hasLogin ? (userInfo.isDistributor ? userInfo.levelName : '普通用户') : '登录后享受更多功能'}}</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="order-section">
+    <view class="section-header" bindtap="goToOrders">
+      <text class="section-title">我的订单</text>
+      <text class="section-more">查看全部 ›</text>
+    </view>
+    <view class="order-tabs">
+      <view class="order-tab" catchtap="goToOrdersWithStatus" data-status="pending">
+        <text class="tab-emoji">💰</text>
+        <text class="tab-text">待支付</text>
+      </view>
+      <view class="order-tab" catchtap="goToOrdersWithStatus" data-status="paid">
+        <text class="tab-emoji">✅</text>
+        <text class="tab-text">已支付</text>
+      </view>
+      <view class="order-tab" catchtap="goToOrdersWithStatus" data-status="refunded">
+        <text class="tab-emoji">📋</text>
+        <text class="tab-text">退款</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToMyCourses">
+      <text class="menu-emoji">📚</text>
+      <text class="menu-text">我的课程</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToLearning">
+      <text class="menu-emoji">📖</text>
+      <text class="menu-text">学习记录</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToFavorites">
+      <text class="menu-emoji">⭐</text>
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToDistribution">
+      <text class="menu-emoji">💰</text>
+      <text class="menu-text">分销中心</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToSettings">
+      <text class="menu-emoji">⚙️</text>
+      <text class="menu-text">设置</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToAbout">
+      <text class="menu-emoji">ℹ️</text>
+      <text class="menu-text">关于我们</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToAdmin">
+      <text class="menu-emoji">🔧</text>
+      <text class="menu-text">管理后台</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+</view>

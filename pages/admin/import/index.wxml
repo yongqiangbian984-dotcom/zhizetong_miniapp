@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="header">
+    <text class="title">数据完整导入</text>
+    <text class="desc">重新创建所有数据（修复权限问题）</text>
+  </view>
+  
+  <view class="step-text" wx:if="{{step}}">{{step}}</view>
+  
+  <view class="progress-section" wx:if="{{importing || completed}}">
+    <text class="progress-text">进度：{{done}}/{{total}}</text>
+    <progress percent="{{percent}}" active stroke-width="12" backgroundColor="#f0f0f0" activeColor="#07c160"/>
+  </view>
+  
+  <view class="result-section" wx:if="{{results.length > 0}}">
+    <view class="result-item {{item.success ? 'success' : 'fail'}}" wx:for="{{results}}" wx:key="index">
+      <text>{{item.title}} - {{item.success ? '✓' : '✗ ' + item.error}}</text>
+    </view>
+  </view>
+  
+  <view class="btn-section">
+    <button class="import-btn" bindtap="startImport" disabled="{{importing}}" loading="{{importing}}">
+      {{importing ? '导入中...' : '开始完整导入'}}
+    </button>
+  </view>
+  
+  <view class="tips">
+    <text class="tip-text">⚠️ 点击后会重新创建所有课程、分类、章节数据</text>
+    <text class="tip-text">⚠️ 导入完成后数据归属当前用户，可正常读写</text>
+  </view>
+</view>
