@@ -1,0 +1,40 @@
+<view class="progress-container">
+  <view class="progress-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-content">
+      <view class="nav-back" bindtap="goBack">‹ 返回</view>
+      <view class="nav-title">家长观察面板</view>
+    </view>
+  </view>
+
+  <view class="overall-section">
+    <view class="overall-label">整体完成度</view>
+    <view class="overall-bar">
+      <view class="overall-fill" style="width: {{completion.total}}%"></view>
+    </view>
+    <view class="overall-num">{{completion.total}}%</view>
+  </view>
+
+  <view class="dim-list">
+    <view class="dim-item" wx:for="{{dimList}}" wx:key="key">
+      <view class="dim-header">
+        <view class="dim-name">{{item.name}}</view>
+        <view class="dim-pct">{{item.completion}}%</view>
+      </view>
+      <view class="dim-bar">
+        <view class="dim-fill" style="width: {{item.completion}}%"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tip-section" wx:if="{{completion.total < 90}}">
+    <view class="tip-text">孩子还在和AI交流中，完成后可生成择校报告</view>
+  </view>
+
+  <view class="parent-chat-btn" bindtap="goToChat">
+    💬 和AI聊聊孩子的情况
+  </view>
+
+  <view class="report-btn" wx:if="{{completion.total >= 90}}" bindtap="showParentTip">
+    孩子的评估已完成
+  </view>
+</view>

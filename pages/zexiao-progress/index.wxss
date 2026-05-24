@@ -1,0 +1,164 @@
+.progress-container {
+  min-height: 100vh;
+  background-color: #faf8f4;
+  padding: 0 40rpx 40rpx;
+  box-sizing: border-box;
+}
+.progress-nav {
+  background-color: #faf8f4;
+  flex-shrink: 0;
+}
+.nav-content {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.nav-back {
+  width: 100rpx;
+  color: #D4AF37;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.nav-title {
+  flex: 1;
+  text-align: center;
+  color: #1a1814;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.header {
+  text-align: center;
+  padding: 60rpx 0 40rpx;
+}
+
+.header-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1a1814;
+}
+
+.header-sub {
+  font-size: 28rpx;
+  color: #888;
+  margin-top: 10rpx;
+}
+
+.overall-section {
+  background: #FFF;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.overall-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.overall-bar {
+  height: 16rpx;
+  background-color: #EAEAEA;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.overall-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #D4AF37, #00FFCC);
+  border-radius: 8rpx;
+  transition: width 0.5s ease;
+}
+
+.overall-num {
+  text-align: right;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #D4AF37;
+  margin-top: 10rpx;
+}
+
+.dim-list {
+  background: #FFF;
+  border-radius: 20rpx;
+  padding: 30rpx 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.dim-item {
+  margin-bottom: 30rpx;
+}
+
+.dim-item:last-child {
+  margin-bottom: 0;
+}
+
+.dim-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.dim-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.dim-pct {
+  font-size: 28rpx;
+  color: #D4AF37;
+  font-weight: bold;
+}
+
+.dim-bar {
+  height: 10rpx;
+  background-color: #EAEAEA;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.dim-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #D4AF37, #00FFCC);
+  border-radius: 5rpx;
+  transition: width 0.5s ease;
+}
+
+.tip-section {
+  text-align: center;
+  padding: 40rpx;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.report-btn {
+  background: linear-gradient(135deg, #1a1814, #333);
+  color: #D4AF37;
+  text-align: center;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 40rpx;
+}
+
+.parent-chat-btn {
+  background: linear-gradient(135deg, #1a1814, #333);
+  color: #00FFCC;
+  text-align: center;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 30rpx;
+}
